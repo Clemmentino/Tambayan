@@ -1,0 +1,553 @@
+html {
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  display: block;
+  min-width: 1440px; /* Desktop min width */
+}
+
+body {
+  background-color: rgb(255, 244, 208);
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.bg-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: url("Pictures/Home.jpg") no-repeat center center/cover;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 0%;
+  padding-right: 5%;
+}
+
+.title {
+  color: #ebebeb;
+  text-align: left;
+  max-width: 150%;
+  z-index: 2;
+  font-family: "Times New Roman", Times, serif;
+  padding: 40px;
+  padding-top: 180px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  top: -50px;
+}
+
+.titletext {
+  font-size: 2.9vw;
+  width: 47rem;
+  padding-left: 40px;
+  text-align: left;
+  max-width: 190%;
+}
+
+.subtext {
+  color: #ebebeb;
+  text-align: left;
+  max-width: 40%;
+  z-index: 2;
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 0.2px;
+  font-size: 0.9vw;
+  padding-left: 40px;
+  position: left;
+  margin-top: 0px;
+  z-index: 1;
+}
+
+.order {
+  border: 2px solid rgb(216, 214, 214);
+  background-color: transparent;
+  color: rgb(214, 214, 214);
+  padding: 10px;
+  width: 12%;
+  height: 15%; /* This height percentage might not behave as expected */
+  border-radius: 50px;
+  transition: transform 0.5s ease-in-out, background-color 0.3s ease-in-out;
+  font-family: Arial;
+  font-size: 1rem;
+  text-align: center;
+  position: relative;
+  left: 40px;
+  top: 20px;
+  z-index: 2;
+}
+
+.order:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 30px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  z-index: 1000;
+  padding: 10px 60px;
+  transition: all 0.5s ease-in-out;
+  backdrop-filter: blur(0px);
+  background: rgba(0, 0, 0, 0);
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  gap: 20px;
+  font-weight: 700;
+}
+
+.nav-center {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  height: 50px;
+  position: relative;
+  left: -20px; /* Adjust this if it causes issues in mobile */
+  bottom: -4px; /* Adjust this if it causes issues in mobile */
+  transition: transform 0.3s ease-in-out;
+  z-index: 999;
+  pointer-events: auto;
+}
+
+.nav-center:hover {
+  cursor: pointer;
+  transform: scale(1.012);
+}
+
+nav .nav-center a { /* Target the logo link specifically */
+    padding: 0; /* Remove padding from logo link */
+    border-radius: 0; /* Remove border radius from logo link */
+    transition: none; /* Remove transition from logo link hover */
+}
+
+
+li a {
+  color: rgb(255, 255, 255);
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-family: Arial;
+  font-weight: 700;
+  line-height: 1.2;
+  display: inline-block;
+  transform-origin: center;
+  font-size: 12px;
+  border-radius: 50px;
+  /* size: 100%; -- Removed invalid CSS property */
+  transition: transform 0.4s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+li a:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: scale(1.04) translateZ(0);
+  font-weight: 700;
+}
+
+li a:active {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #ebebeb;
+}
+
+.nav-left li,
+.nav-right li {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 10px 15px;
+  width: max-content;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  z-index: 99;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.1s ease, transform 0.2s ease;
+}
+
+.search-dropdown.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 5px 10px;
+  gap: 8px;
+}
+
+.search-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  color: #333;
+}
+
+.search-input-wrapper input {
+  padding: 8px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: transparent;
+  flex: 1;
+  color: #333;
+}
+
+.search-dropdown ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-dropdown li {
+  padding: 10px;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 2px 0;
+  color: #f0f0f0;
+  transition: background-color 0.2s ease-in-out;
+  z-index: 9999;
+}
+
+.search-dropdown li:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.search-dropdown li:active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.content1 {
+  min-height: 120vh;
+  padding: 50px;
+  background-color: rgb(255, 248, 239);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 5%;
+}
+
+.content1 h2 {
+  font-size: clamp(1.8rem, 2vw, 1.8rem);
+}
+
+.content2 {
+  min-height: 120vh;
+  padding: 50px;
+  background-color: rgb(255, 248, 239);
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  justify-content: center;
+  padding-left: 5%;
+  text-align: right;
+}
+
+.content2 h2 {
+  font-size: clamp(1.8rem, 2vw, 1.8rem);
+}
+
+/* New CSS for hamburger menu */
+.hamburger {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* Above the nav */
+    position: relative; /* Needed for positioning the spans */
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: white; /* Adjust color */
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger span:last-child {
+    margin-bottom: 0;
+}
+
+/* Mobile media query - Hamburger menu appears below 768px */
+@media (max-width: 768px) {
+    html, body {
+        min-width: auto; /* Allow proper mobile scaling */
+        overflow-x: hidden;
+    }
+
+    nav {
+        padding: 10px 20px; /* Adjust padding */
+        flex-wrap: wrap; /* Allow items to wrap */
+        justify-content: space-between; /* Logo left, hamburger right */
+        align-items: center; /* Vertically align logo and hamburger */
+        background: rgba(0, 0, 0, 0.5); /* Add a background to the fixed nav on mobile */
+        backdrop-filter: blur(5px); /* Add blur on mobile */
+    }
+
+    .nav-left,
+    .nav-right {
+        display: none; /* Hide nav links by default */
+        width: 100%; /* Take full width when shown */
+        flex-direction: column; /* Stack links vertically */
+        gap: 0; /* Adjust gap for vertical list */
+        background: rgba(0, 0, 0, 0.8); /* Background for the menu */
+        position: absolute; /* Position menu */
+        top: 100%; /* Below the nav bar */
+        left: 0;
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+        padding: 10px 0; /* Add some padding */
+    }
+
+    /* Show menu when nav has 'menu-open' class (requires JS to toggle) */
+    nav.menu-open .nav-left,
+    nav.menu-open .nav-right {
+        display: flex; /* Show the links */
+        opacity: 1;
+        pointer-events: auto;
+        position: static; /* Position relative to the flow when open */
+    }
+
+    nav.menu-open .nav-right {
+        margin-top: 0; /* Remove top margin */
+    }
+
+     .nav-center {
+        position: static; /* Reset positioning for logo */
+        left: auto;
+        bottom: auto;
+        margin-bottom: 0; /* Remove margin */
+        height: 40px; /* Adjust logo size */
+     }
+
+     .nav-center img {
+         height: 100%; /* Make image fill container */
+         width: auto;
+     }
+
+
+    li a {
+        padding: 15px 20px; /* Adjust padding for mobile links */
+        text-align: left; /* Align links left */
+        width: 100%; /* Full width link */
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Separator */
+        border-radius: 0; /* Remove border radius */
+        font-size: 16px; /* Adjust font size for mobile */
+        display: block; /* Ensure block display for full width clickable area */
+    }
+
+     li a:hover {
+        background-color: rgba(0, 0, 0, 0.1); /* Hover effect */
+    }
+
+    li a:active {
+         background-color: rgba(0, 0, 0, 0.2);
+    }
+
+
+    .hamburger {
+        display: block; /* Show hamburger icon */
+        order: 2; /* Order the hamburger after the logo if using flex wrap */
+    }
+    nav .nav-center {
+        order: 1; /* Order the logo before the hamburger */
+    }
+
+
+    /* Styles for the search dropdown within the mobile menu */
+    .search-wrapper {
+        width: calc(100% - 40px); /* Adjust width considering parent padding */
+        margin: 10px 20px; /* Center the search input */
+        position: static; /* Remove absolute positioning */
+    }
+
+    .search-dropdown {
+        position: static; /* Position relative to the flow */
+        margin-top: 10px;
+        width: 100%; /* Fill the wrapper width */
+        padding: 10px;
+        box-shadow: none;
+        background: rgba(255, 255, 255, 0.9); /* Lighter background for visibility */
+        color: #333;
+        transform: translateY(0); /* Reset transform */
+        opacity: 1; /* Keep visible when menu is open */
+        pointer-events: auto;
+        border-radius: 5px; /* Adjust border radius */
+    }
+
+     .search-input-wrapper input {
+         color: #333; /* Ensure input text is visible */
+     }
+
+     .search-dropdown ul {
+         max-height: 150px; /* Adjust max height for results */
+     }
+
+     .search-dropdown li {
+        color: #333; /* Ensure result text is visible */
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: 8px 10px;
+     }
+     .search-dropdown li:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+     }
+
+    /* Hamburger icon animation (optional, usually done with JS and class) */
+     /* Example for 'X' transformation when nav has class 'menu-open' */
+     nav.menu-open .hamburger span:nth-child(1) {
+         transform: rotate(-45deg) translate(-5px, 6px);
+     }
+     nav.menu-open .hamburger span:nth-child(2) {
+         opacity: 0;
+     }
+     nav.menu-open .hamburger span:nth-child(3) {
+         transform: rotate(45deg) translate(-5px, -6px);
+     }
+
+
+    /* Adjust smooth-content padding to not be hidden behind fixed nav */
+    /* Calculate nav height on mobile: approx 40px (logo) + 10px*2 (padding) = 60px */
+    .smooth-content {
+         padding-top: 60px; /* Add padding equal to mobile nav height */
+     }
+
+    /* Adjust title padding and sizes for mobile */
+     .title {
+         padding: 20px; /* Adjust padding */
+         padding-top: 80px; /* Adjust top padding */
+         max-width: 100%; /* Allow title to take more width */
+         top: 0; /* Reset top positioning */
+         left: 0; /* Reset left positioning */
+         text-align: center; /* Center title text */
+         display: block; /* Allow full width */
+     }
+
+    .titletext {
+        font-size: clamp(1.8rem, 5vw, 2.5rem); /* Adjust font size for mobile */
+        width: 100%; /* Use full width */
+        padding-left: 0; /* Remove left padding */
+        max-width: 100%; /* Ensure max width */
+        text-align: center; /* Center text */
+        margin-bottom: 20px; /* Add space below title text */
+    }
+
+    .subtext {
+        font-size: clamp(0.8rem, 3vw, 1rem); /* Adjust font size */
+        padding-left: 0; /* Remove left padding */
+        max-width: 90%; /* Adjust max width */
+        text-align: center; /* Center text */
+        margin: 0 auto 20px auto; /* Center paragraph and add space below */
+    }
+
+    .order {
+        position: static; /* Remove absolute positioning */
+        margin: 20px auto; /* Center the button */
+        left: auto;
+        top: auto;
+        width: 150px; /* Set a fixed width or adjust as needed */
+        height: auto; /* Auto height */
+        font-size: 1rem; /* Keep font size */
+        display: block; /* Make it a block element to center with margin auto */
+    }
+
+    .content1,
+    .content2 {
+         padding: 20px; /* Adjust padding */
+         padding-left: 5%; /* Keep left padding as before */
+         text-align: left; /* Default text alignment for content sections */
+         min-height: 80vh; /* Adjust minimum height */
+    }
+
+     .content2 {
+         align-items: flex-start; /* Align content to left in mobile */
+         text-align: left; /* Align text to left in mobile */
+     }
+
+     .content1 h2,
+     .content2 h2 {
+         font-size: clamp(1.5rem, 4vw, 1.8rem); /* Adjust h2 font size */
+     }
+
+     /* Desktop media queries below 768px are now effectively superseded by the 768px rule */
+     /* You might want to adjust these or remove them depending on desired breakpoints */
+}
+
+/* Keeping the original smaller media queries for potentially finer adjustments if needed */
+/* Note: These will apply *within* the max-width: 768px context if the screen is even smaller */
+@media (max-width: 1024px) {
+  /* Original 1024px styles */
+}
+
+@media (max-width: 768px) {
+  /* This is the main mobile breakpoint now */
+}
+
+@media (max-width: 480px) {
+  /* Original 480px styles - these might need further refinement within the mobile menu context */
+  /* For example, font sizes might need to be adjusted again here */
+}

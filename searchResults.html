@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- searchResults.html -->
+    <ul id="productList">
+      <li class="product-item" data-name="Product 1">
+        <span class="product-name">Product 1</span>
+      </li>
+      <li class="product-item" data-name="Product 2">
+        <span class="product-name">Product 2</span>
+      </li>
+      <li class="location-item" data-location="New York">
+        <span class="location-name">New York</span>
+      </li>
+      <li class="location-item" data-location="Los Angeles">
+        <span class="location-name">Los Angeles</span>
+      </li>
+    </ul>
+
+    <script>
+      // Get the query from the URL (e.g., searchResults.html?query=New+York)
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get("query").toLowerCase(); // Get the search term and convert it to lowercase
+
+      // Get all product and location items
+      const productItems = document.querySelectorAll(".product-item");
+      const locationItems = document.querySelectorAll(".location-item");
+
+      // Function to filter and show only matching items
+      function filterItems(items, searchTerm, dataAttribute) {
+        items.forEach((item) => {
+          const itemName = item.getAttribute(dataAttribute).toLowerCase();
+          if (itemName.includes(searchTerm)) {
+            item.style.display = ""; // Show item
+          } else {
+            item.style.display = "none"; // Hide item
+          }
+        });
+      }
+
+      // Filter products and locations based on the search term
+      filterItems(productItems, query, "data-name");
+      filterItems(locationItems, query, "data-location");
+    </script>
+  </body>
+</html>
